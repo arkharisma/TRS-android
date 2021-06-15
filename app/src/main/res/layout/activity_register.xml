@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".views.auth.RegisterActivity">
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            app:cardCornerRadius="50dp"
+            app:cardPreventCornerOverlap="false"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:padding="10dp"
+                android:src="@drawable/logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Username"
+            android:theme="@style/myHintStyle"
+            app:hintTextColor="@color/primary_variant_color"
+            android:textColor="@color/primary_variant_color"
+            android:textColorHint="@color/primary_variant_color"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:gravity="left"
+                android:drawableLeft="@drawable/ic_baseline_people_white"
+                android:drawableTint="@color/primary_variant_color"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:id="@+id/etUsername"
+                android:textColor="@color/primary_variant_color"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="First Name"
+            android:theme="@style/myHintStyle"
+            app:hintTextColor="@color/primary_variant_color"
+            android:textColor="@color/primary_variant_color"
+            android:textColorHint="@color/primary_variant_color"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:gravity="left"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/ic_baseline_first"
+                android:drawableTint="@color/primary_variant_color"
+                android:drawablePadding="10dp"
+                android:inputType="textCapWords"
+                android:id="@+id/etFirstName"
+                android:textColor="@color/primary_variant_color"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Last Name"
+            android:theme="@style/myHintStyle"
+            app:hintTextColor="@color/primary_variant_color"
+            android:textColor="@color/primary_variant_color"
+            android:textColorHint="@color/primary_variant_color"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:gravity="left"
+                android:drawableLeft="@drawable/ic_baseline_last"
+                android:drawableTint="@color/primary_variant_color"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:id="@+id/etLastName"
+                android:textColor="@color/primary_variant_color"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Phone Number"
+            android:theme="@style/myHintStyle"
+            app:hintTextColor="@color/primary_variant_color"
+            android:textColor="@color/primary_variant_color"
+            android:textColorHint="@color/primary_variant_color"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:gravity="left"
+                android:drawableLeft="@drawable/ic_baseline_phone_24"
+                android:drawableTint="@color/primary_variant_color"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:inputType="number"
+                android:id="@+id/etPhoneNumber"
+                android:textColor="@color/primary_variant_color"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Password"
+            app:hintTextColor="@color/primary_variant_color"
+            android:textColor="@color/primary_variant_color"
+            android:textColorHint="@color/primary_variant_color"
+            android:layout_width="match_parent"
+            android:theme="@style/myHintStyle"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:gravity="left"
+                android:drawableLeft="@drawable/ic_baseline_fingerprint_24"
+                android:drawableTint="@color/primary_variant_color"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:textColor="@color/primary_variant_color"
+                android:id="@+id/etPassword"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="Register"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/primary_variant_color"
+            android:layout_height="60dp"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:text="Already have an account? "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textColor="@color/primary_variant_color"
+                android:id="@+id/tvLogin"
+                android:textStyle="bold"
+                android:text="Sign In"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="@color/primary_variant_color"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:text="Version 0.1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
