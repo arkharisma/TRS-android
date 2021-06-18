@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
+import com.velxoz.finalproject.MainActivity;
 import com.velxoz.finalproject.R;
+import com.velxoz.finalproject.util.session.MainSession;
 import com.velxoz.finalproject.views.auth.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static Integer SPLASH_TIME_OUT = 1500;
+    MainSession mainSession;
+    Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                mainSession = new MainSession(SplashScreenActivity.this);
+                i = (mainSession.isLoggedIn() ? new Intent(SplashScreenActivity.this, MainActivity.class) : new Intent(SplashScreenActivity.this, LoginActivity.class));
                 startActivity(i);
                 finish();
             }

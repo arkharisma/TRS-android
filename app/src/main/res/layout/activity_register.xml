@@ -48,7 +48,7 @@
                 android:singleLine="true"
                 android:inputType="textEmailAddress"
                 android:id="@+id/etUsername"
-                android:textColor="@color/primary_variant_color"
+                android:textColor="@android:color/black"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -75,7 +75,7 @@
                 android:drawablePadding="10dp"
                 android:inputType="textCapWords"
                 android:id="@+id/etFirstName"
-                android:textColor="@color/primary_variant_color"
+                android:textColor="@android:color/black"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -102,7 +102,7 @@
                 android:singleLine="true"
                 android:inputType="textCapWords"
                 android:id="@+id/etLastName"
-                android:textColor="@color/primary_variant_color"
+                android:textColor="@android:color/black"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -129,7 +129,7 @@
                 android:singleLine="true"
                 android:inputType="number"
                 android:id="@+id/etPhoneNumber"
-                android:textColor="@color/primary_variant_color"
+                android:textColor="@android:color/black"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -155,7 +155,7 @@
                 android:drawablePadding="10dp"
                 android:singleLine="true"
                 android:inputType="textPassword"
-                android:textColor="@color/primary_variant_color"
+                android:textColor="@android:color/black"
                 android:id="@+id/etPassword"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
