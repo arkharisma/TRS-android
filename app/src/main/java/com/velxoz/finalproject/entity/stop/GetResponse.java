@@ -12,12 +12,12 @@ public class GetResponse {
     @SerializedName("data")
     private List<DataGetResponse> data = null;
     @SerializedName("object")
-    private Object object;
+    private String object;
 
     public GetResponse() {
     }
 
-    public GetResponse(Boolean success, String message, List<DataGetResponse> data, Object object) {
+    public GetResponse(Boolean success, String message, List<DataGetResponse> data, String object) {
         this.success = success;
         this.message = message;
         this.data = data;
@@ -48,11 +48,11 @@ public class GetResponse {
         this.data = data;
     }
 
-    public Object getObject() {
+    public String getObject() {
         return object;
     }
 
-    public void setObject(Object object) {
+    public void setObject(String object) {
         this.object = object;
     }
 }
