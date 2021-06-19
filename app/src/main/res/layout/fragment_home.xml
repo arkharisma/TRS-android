@@ -46,10 +46,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/tvFullName"
                 android:textSize="20sp"
                 android:textColor="@color/name_color"
                 android:textStyle="bold"
-                android:text="Muhammad Arka Kharisma"
+                android:text="John Doe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

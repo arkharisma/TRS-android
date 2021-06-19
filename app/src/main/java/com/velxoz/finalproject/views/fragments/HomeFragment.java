@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.synnapps.carouselview.CarouselView;
@@ -58,6 +59,7 @@ public class HomeFragment extends Fragment {
     EditText etKalender, etKalenderTemp;
     AutoCompleteTextView spSourceStop, spDestStop;
     Button btnCari;
+    TextView tvFullName;
 
     StopApiInterface stopApiInterface;
 
@@ -135,10 +137,12 @@ public class HomeFragment extends Fragment {
         spSourceStop = view.findViewById(R.id.spSourceStop);
         spDestStop = view.findViewById(R.id.spDestStop);
         btnCari = view.findViewById(R.id.btnCari);
+        tvFullName = view.findViewById(R.id.tvFullName);
         spinnerListName = new ArrayList<>();
         listStops = new HashMap<>();
         mainSession = new MainSession(view.getContext());
         user = mainSession.getUserDetails();
+        tvFullName.setText(user.get("first_name") + " " + user.get("last_name"));
         token = user.get("token");
         carouselView = view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
