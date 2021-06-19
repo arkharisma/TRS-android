@@ -17,10 +17,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="50dp"
                 app:strokeWidth="2dp"
                 app:strokeColor="@color/primary_variant_color"
@@ -36,9 +36,41 @@
                     android:layout_height="100dp"/>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <TextView
+                android:id="@+id/tvFullName"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:text="John Doe"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:textColor="#444444"
+                android:textSize="16sp"
+                android:text="username@example.com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:textColor="#444444"
+                android:textSize="14sp"
+                android:text="+62812345678"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="@color/grey_almost_white"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
                 <TextView
                     android:id="@+id/tvUbahDataDiri"
@@ -46,8 +78,8 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:text="Ubah data diri"
+                    android:textSize="16sp"
+                    android:text="Ubah Data Diri"
                     android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                     android:drawableTint="@color/primary_variant_color"
                     android:layout_width="match_parent"
@@ -56,8 +88,31 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="@color/grey_almost_white"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
+
+                <TextView
+                    android:id="@+id/tvUbahKataSandi"
+                    android:textColor="@color/primary_variant_color"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:text="Ubah Kata Sandi"
+                    android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    android:drawableTint="@color/primary_variant_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="@color/grey_almost_white"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
                 <TextView
                     android:id="@+id/tvVoucher"
@@ -65,7 +120,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Voucher"
                     android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                     android:drawableTint="@color/primary_variant_color"
@@ -75,8 +130,10 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="@color/grey_almost_white"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
 
                 <TextView
                     android:id="@+id/tvPusatBantuan"
@@ -84,7 +141,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Pusat Bantuan"
                     android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                     android:drawableTint="@color/primary_variant_color"
@@ -94,8 +151,10 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="@color/grey_almost_white"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
 
                 <TextView
                     android:id="@+id/tvPengaturan"
@@ -103,7 +162,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Pengaturan"
                     android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                     android:drawableTint="@color/primary_variant_color"
