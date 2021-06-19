@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,6 +35,7 @@ import com.velxoz.finalproject.models.APIClient;
 import com.velxoz.finalproject.models.AuthApiInterface;
 import com.velxoz.finalproject.models.StopApiInterface;
 import com.velxoz.finalproject.util.session.MainSession;
+import com.velxoz.finalproject.views.SearchTripActivity;
 import com.velxoz.finalproject.views.auth.LoginActivity;
 
 import java.text.SimpleDateFormat;
@@ -53,12 +56,14 @@ public class HomeFragment extends Fragment {
     Calendar calendar;
     DatePickerDialog.OnDateSetListener date;
     EditText etKalender, etKalenderTemp;
-    Spinner spSourceStop, spDestStop;
+    AutoCompleteTextView spSourceStop, spDestStop;
+    Button btnCari;
 
     StopApiInterface stopApiInterface;
 
     List<String> spinnerListName;
-    List<String> spinnerListId;
+
+    HashMap<String, String> listStops;
 
     MainSession mainSession;
     HashMap<String, String> user;
@@ -86,18 +91,10 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         loadComponent();
-
         loadStops();
 
-        carouselView = view.findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
-
-        carouselView.setImageListener(imageListener);
-
         calendar = Calendar.getInstance();
-
         etKalender = view.findViewById(R.id.etKalender);
-
         date = (view1, year, month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
@@ -110,15 +107,24 @@ public class HomeFragment extends Fragment {
             etKalenderTemp = etKalender;
         });
 
-        spSourceStop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                parent.getChildAt(position).setText
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+        btnCari.setOnClickListener(v -> {
+            if(spSourceStop.getText().toString().equals("")){
+                Toast.makeText(getActivity(), "Harap lengkapi data untuk pencarian", Toast.LENGTH_SHORT).show();
+            } else if(spDestStop.getText().toString().equals("")){
+                Toast.makeText(getActivity(), "Harap lengkapi data untuk pencarian", Toast.LENGTH_SHORT).show();
+            } else {
+                try {
+                    Log.d("selected_item", "etKalender: " + etKalender.getText().toString());
+                    Log.d("selected_item", "etKalenderTemp: " + etKalenderTemp.getText().toString());
+                    Log.d("selected_item", "spSourceStop: " + spSourceStop.getText().toString());
+                    Log.d("selected_item", "spSourceStopID: " + listStops.get(spSourceStop.getText().toString()));
+                    Log.d("selected_item", "spDestStop: " + spDestStop.getText().toString());
+                    Log.d("selected_item", "spDestStopID: " + listStops.get(spDestStop.getText().toString()));
+                    Intent i = new Intent(getActivity(), SearchTripActivity.class);
+                    startActivity(i);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Harap lengkapi data untuk pencarian", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -128,11 +134,15 @@ public class HomeFragment extends Fragment {
     private void loadComponent() {
         spSourceStop = view.findViewById(R.id.spSourceStop);
         spDestStop = view.findViewById(R.id.spDestStop);
+        btnCari = view.findViewById(R.id.btnCari);
         spinnerListName = new ArrayList<>();
-        spinnerListId = new ArrayList<>();
+        listStops = new HashMap<>();
         mainSession = new MainSession(view.getContext());
         user = mainSession.getUserDetails();
         token = user.get("token");
+        carouselView = view.findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
     }
 
     ImageListener imageListener = (position, imageView) -> imageView.setImageResource(sampleImages[position]);
@@ -164,10 +174,9 @@ public class HomeFragment extends Fragment {
                 GetResponse getResponse = response.body();
                 if (getResponse.getSuccess()){
                     for (int i = 0; i < getResponse.getData().size(); i++ ){
-                        spinnerListId.add(getResponse.getData().get(i).getId());
                         spinnerListName.add(getResponse.getData().get(i).getName());
+                        listStops.put(getResponse.getData().get(i).getName(), getResponse.getData().get(i).getId());
                     }
-                    Log.d("SpinnerName", "onResponse: " + spinnerListName.toString());
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinner_list_item, spinnerListName);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spSourceStop.setAdapter(adapter);

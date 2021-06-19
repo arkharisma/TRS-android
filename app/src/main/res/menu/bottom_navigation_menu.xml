@@ -4,15 +4,15 @@
         android:id="@+id/navHome"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home"/>
+        android:title="Beranda"/>
     <item
         android:id="@+id/navTicket"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_ticket_24"
-        android:title="Ticket"/>
+        android:title="Tiket"/>
     <item
         android:id="@+id/navProfile"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"/>
+        android:title="Profil"/>
 </menu>

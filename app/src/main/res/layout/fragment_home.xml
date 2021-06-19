@@ -70,7 +70,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_marginTop="40dp"
-                android:paddingTop="20dp"
+                android:paddingTop="50dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:orientation="vertical"
@@ -79,54 +79,56 @@
                 android:layout_height="match_parent">
 
                 <!--            Keberangkatan -->
-                <TextView
-                    android:layout_marginTop="20dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:hint="Berangkat dari"
+                    android:textColorHint="@android:color/white"
                     android:layout_marginBottom="10dp"
-                    android:textSize="16sp"
-                    android:text="Berangkat dari"
-                    android:textColor="@android:color/white"
+                    app:startIconDrawable="@drawable/ic_baseline_place_24"
+                    app:startIconTint="@android:color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
 
-                <Spinner
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/spSourceStop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <AutoCompleteTextView
+                        android:textColor="@android:color/white"
+                        android:id="@+id/spSourceStop"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--            Tujuan -->
-                <TextView
-                    android:layout_marginTop="10dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:hint="Menuju"
+                    android:textColorHint="@android:color/white"
                     android:layout_marginBottom="10dp"
-                    android:textSize="16sp"
-                    android:text="Menuju"
-                    android:textColor="@android:color/white"
+                    app:startIconDrawable="@drawable/ic_baseline_place_24"
+                    app:startIconTint="@android:color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
 
-                <Spinner
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/spDestStop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <AutoCompleteTextView
+                        android:textColor="@android:color/white"
+                        android:id="@+id/spDestStop"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--            Tanggal Keberangkatan-->
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="16sp"
-                    android:text="Tanggal keberangkatan"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginRight="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/ic_baseline_calendar_24"
                     app:startIconTint="@android:color/white"
@@ -154,10 +156,10 @@
                 android:backgroundTint="@android:color/white"
                 android:id="@+id/btnCari"
                 android:text="Cari"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingRight="70dp"
-                android:paddingLeft="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingRight="80dp"
+                android:paddingLeft="80dp"
                 android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
