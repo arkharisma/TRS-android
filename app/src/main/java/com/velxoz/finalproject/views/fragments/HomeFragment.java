@@ -175,16 +175,18 @@ public class HomeFragment extends Fragment {
         stopsCall.enqueue(new Callback<GetResponse>() {
             @Override
             public void onResponse(Call<GetResponse> call, Response<GetResponse> response) {
-                GetResponse getResponse = response.body();
-                if (getResponse.getSuccess()){
-                    for (int i = 0; i < getResponse.getData().size(); i++ ){
-                        spinnerListName.add(getResponse.getData().get(i).getName());
-                        listStops.put(getResponse.getData().get(i).getName(), getResponse.getData().get(i).getId());
+                if (response.body() != null) {
+                    GetResponse getResponse = response.body();
+                    if (getResponse.getSuccess()) {
+                        for (int i = 0; i < getResponse.getData().size(); i++) {
+                            spinnerListName.add(getResponse.getData().get(i).getName());
+                            listStops.put(getResponse.getData().get(i).getName(), getResponse.getData().get(i).getId());
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinner_list_item, spinnerListName);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spSourceStop.setAdapter(adapter);
+                        spDestStop.setAdapter(adapter);
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinner_list_item, spinnerListName);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spSourceStop.setAdapter(adapter);
-                    spDestStop.setAdapter(adapter);
                 }
             }
 
