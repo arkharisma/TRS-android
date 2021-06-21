@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -147,7 +148,9 @@ public class HomeFragment extends Fragment {
         carouselView.setImageListener(imageListener);
     }
 
-    ImageListener imageListener = (position, imageView) -> imageView.setImageResource(sampleImages[position]);
+    ImageListener imageListener = (position, imageView) -> {
+        imageView.setImageResource(sampleImages[position]);
+    };
 
     private void showCalendar(DatePickerDialog.OnDateSetListener date) {
         DatePickerDialog dialog = new DatePickerDialog(

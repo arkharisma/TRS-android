@@ -14,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.velxoz.finalproject.R;
 import com.velxoz.finalproject.entity.ListResponse;
 import com.velxoz.finalproject.entity.tripschedule.TripScheduleResponse;
+import com.velxoz.finalproject.util.Currency;
 import com.velxoz.finalproject.views.BookingActivity;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleListAdapter.MyViewHolder> {
 
@@ -42,12 +46,13 @@ public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleLi
         holder.tvDestStop.setText(tripScheduleList.getData().get(position).getDestStop());
         holder.tvTanggal.setText(tripScheduleList.getData().get(position).getTripDate());
         holder.tvTime.setText(tripScheduleList.getData().get(position).getJourneyTime());
-        holder.tvHarga.setText(Integer.toString(tripScheduleList.getData().get(position).getFare()));
+        holder.tvHarga.setText(Currency.getCurrencyFormat(tripScheduleList.getData().get(position).getFare()));
 
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("id_trip", tripScheduleList.getData().get(position).getId());
             Intent i = new Intent(v.getContext(), BookingActivity.class);
+            i.putExtras(bundle);
             v.getContext().startActivity(i);
         });
     }

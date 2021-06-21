@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +18,7 @@ import com.velxoz.finalproject.entity.tripschedule.TripScheduleResponse;
 import com.velxoz.finalproject.models.APIClient;
 import com.velxoz.finalproject.models.TripInterface;
 import com.velxoz.finalproject.util.session.MainSession;
+import com.velxoz.finalproject.views.auth.LoginActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -48,7 +52,32 @@ public class SearchTripActivity extends AppCompatActivity {
         rvListTrip.setLayoutManager(mLayoutManagerTrip);
         tripInterface = APIClient.getClient(token).create(TripInterface.class);
 
-        refresh();
+        final ProgressDialog progressDialog = new ProgressDialog(SearchTripActivity.this, R.style.dialogWaiting);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.show();
+
+        new Thread(){
+            @Override
+            public void run(){
+                super.run();
+                try{
+                    Thread.sleep(1000);
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                    try{
+                        runOnUiThread(() -> {
+                            refresh();
+                        });
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                        Log.wtf("Error : ", e.getMessage());
+                    }
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void refresh(){

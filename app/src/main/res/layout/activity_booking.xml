@@ -1,9 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.BookingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_above="@id/navBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/bus_caravan"
+            android:layout_width="120dp"
+            android:layout_height="120dp"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            android:text="Nama Bus"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvAgencyName"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:text="Agency Name"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Kode Bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvBusCode"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Kode Bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Kota Asal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvSourceStop"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Padang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Kota Tujuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDestStop"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Banda Aceh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Tanggal Keberangkatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTanggal"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="14/06/2021"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Jam Keberangkatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvJam"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="08.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="Kursi Tersedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvSeats"
+            android:textColor="@color/primary_variant_color"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/navBottom"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:text="Harga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvHarga"
+                android:text="Rp. 100.000,-"
+                android:textSize="18sp"
+                android:textColor="@color/primary_variant_color"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnPesan"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Pesan Tiket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</RelativeLayout>
