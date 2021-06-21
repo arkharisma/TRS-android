@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.UnderConstructionActivity"></activity>
+        <activity android:name=".views.BookingActivity"></activity>
+        <activity android:name=".views.UnderConstructionActivity" />
         <activity android:name=".views.SearchTripActivity" />
         <activity android:name=".views.auth.RegisterActivity" />
         <activity android:name=".views.auth.LoginActivity" />

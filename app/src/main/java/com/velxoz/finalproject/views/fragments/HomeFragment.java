@@ -1,11 +1,7 @@
 package com.velxoz.finalproject.views.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,30 +10,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
-import com.velxoz.finalproject.MainActivity;
 import com.velxoz.finalproject.R;
-import com.velxoz.finalproject.entity.auth.signin.SignInRequest;
-import com.velxoz.finalproject.entity.auth.signin.SignInResponse;
-import com.velxoz.finalproject.entity.stop.GetResponse;
+import com.velxoz.finalproject.entity.ListResponse;
+import com.velxoz.finalproject.entity.stop.DataGetResponse;
 import com.velxoz.finalproject.models.APIClient;
-import com.velxoz.finalproject.models.AuthApiInterface;
 import com.velxoz.finalproject.models.StopApiInterface;
 import com.velxoz.finalproject.util.session.MainSession;
 import com.velxoz.finalproject.views.SearchTripActivity;
-import com.velxoz.finalproject.views.auth.LoginActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +46,7 @@ public class HomeFragment extends Fragment {
     DatePickerDialog.OnDateSetListener date;
     EditText etKalender, etKalenderTemp;
     AutoCompleteTextView spSourceStop, spDestStop;
-    Button btnCari;
+    Button btnCari, btnReset;
     TextView tvFullName;
 
     StopApiInterface stopApiInterface;
@@ -107,6 +95,11 @@ public class HomeFragment extends Fragment {
         etKalender.setOnClickListener(v -> {
             showCalendar(date);
             etKalenderTemp = etKalender;
+            Log.d("KALENDER", "onCreateView: " + etKalenderTemp.getText().toString());
+        });
+
+        btnReset.setOnClickListener(v -> {
+            reset();
         });
 
         btnCari.setOnClickListener(v -> {
@@ -115,28 +108,33 @@ public class HomeFragment extends Fragment {
             } else if(spDestStop.getText().toString().equals("")){
                 Toast.makeText(getActivity(), "Harap lengkapi data untuk pencarian", Toast.LENGTH_SHORT).show();
             } else {
-                try {
-                    Log.d("selected_item", "etKalender: " + etKalender.getText().toString());
-                    Log.d("selected_item", "etKalenderTemp: " + etKalenderTemp.getText().toString());
-                    Log.d("selected_item", "spSourceStop: " + spSourceStop.getText().toString());
-                    Log.d("selected_item", "spSourceStopID: " + listStops.get(spSourceStop.getText().toString()));
-                    Log.d("selected_item", "spDestStop: " + spDestStop.getText().toString());
-                    Log.d("selected_item", "spDestStopID: " + listStops.get(spDestStop.getText().toString()));
-                    Intent i = new Intent(getActivity(), SearchTripActivity.class);
-                    startActivity(i);
-                } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Harap lengkapi data untuk pencarian", Toast.LENGTH_SHORT).show();
+                if(etKalender == null){
+                    etKalender.setText("");
                 }
+                Bundle bundle = new Bundle();
+                bundle.putString("source_stop", listStops.get(spSourceStop.getText().toString()));
+                bundle.putString("dest_stop", listStops.get(spDestStop.getText().toString()));
+                bundle.putString("tanggal", etKalender.getText().toString());
+                Intent i = new Intent(getActivity(), SearchTripActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
 
         return view;
     }
 
+    private void reset(){
+        spSourceStop.getText().clear();
+        spDestStop.getText().clear();
+        etKalender.getText().clear();
+    }
+
     private void loadComponent() {
         spSourceStop = view.findViewById(R.id.spSourceStop);
         spDestStop = view.findViewById(R.id.spDestStop);
         btnCari = view.findViewById(R.id.btnCari);
+        btnReset = view.findViewById(R.id.btnReset);
         tvFullName = view.findViewById(R.id.tvFullName);
         spinnerListName = new ArrayList<>();
         listStops = new HashMap<>();
@@ -163,20 +161,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateLabel(EditText editText) {
-        String myFormat = "MM/dd/yyyy";
+        String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         editText.setText(sdf.format(calendar.getTime()));
     }
 
     private void loadStops(){
         stopApiInterface = APIClient.getClient(token).create(StopApiInterface.class);
-        Call<GetResponse> stopsCall = stopApiInterface.getAllStops();
+        Call<ListResponse<DataGetResponse>> stopsCall = stopApiInterface.getAllStops();
 
-        stopsCall.enqueue(new Callback<GetResponse>() {
+        stopsCall.enqueue(new Callback<ListResponse<DataGetResponse>>() {
             @Override
-            public void onResponse(Call<GetResponse> call, Response<GetResponse> response) {
+            public void onResponse(Call<ListResponse<DataGetResponse>> call, Response<ListResponse<DataGetResponse>> response) {
                 if (response.body() != null) {
-                    GetResponse getResponse = response.body();
+                    ListResponse<DataGetResponse> getResponse = response.body();
                     if (getResponse.getSuccess()) {
                         for (int i = 0; i < getResponse.getData().size(); i++) {
                             spinnerListName.add(getResponse.getData().get(i).getName());
@@ -191,7 +189,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<GetResponse> call, Throwable t) {
+            public void onFailure(Call<ListResponse<DataGetResponse>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Failed Parsing Data", Toast.LENGTH_SHORT).show();
             }
         });

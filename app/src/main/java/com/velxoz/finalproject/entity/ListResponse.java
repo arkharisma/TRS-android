@@ -1,23 +1,23 @@
-package com.velxoz.finalproject.entity.stop;
+package com.velxoz.finalproject.entity;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class GetResponse {
+public class ListResponse<T> {
     @SerializedName("success")
     private Boolean success;
     @SerializedName("message")
     private String message;
     @SerializedName("data")
-    private List<DataGetResponse> data = null;
+    private List<T> data = null;
     @SerializedName("object")
     private String object;
 
-    public GetResponse() {
+    public ListResponse() {
     }
 
-    public GetResponse(Boolean success, String message, List<DataGetResponse> data, String object) {
+    public ListResponse(Boolean success, String message, List<T> data, String object) {
         this.success = success;
         this.message = message;
         this.data = data;
@@ -40,11 +40,11 @@ public class GetResponse {
         this.message = message;
     }
 
-    public List<DataGetResponse> getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(List<DataGetResponse> data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 

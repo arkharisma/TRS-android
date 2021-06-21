@@ -150,20 +150,45 @@
 
             </LinearLayout>
 
-            <Button
+            <LinearLayout
+                android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/primary_variant_color"
-                android:backgroundTint="@android:color/white"
-                android:id="@+id/btnCari"
-                android:text="Cari"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:paddingRight="80dp"
-                android:paddingLeft="80dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primary_variant_color"
+                    android:backgroundTint="@android:color/white"
+                    android:id="@+id/btnReset"
+                    android:text="Reset"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingRight="55dp"
+                    android:paddingLeft="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primary_variant_color"
+                    android:backgroundTint="@android:color/white"
+                    android:id="@+id/btnCari"
+                    android:text="Cari"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingRight="55dp"
+                    android:paddingLeft="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
         </RelativeLayout>
 
