@@ -3,18 +3,23 @@ package com.velxoz.finalproject.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.velxoz.finalproject.R;
 import com.velxoz.finalproject.entity.ObjectResponse;
+import com.velxoz.finalproject.entity.booking.BookingRequest;
+import com.velxoz.finalproject.entity.booking.BookingResponse;
 import com.velxoz.finalproject.entity.tripschedule.TripScheduleResponse;
 import com.velxoz.finalproject.models.APIClient;
+import com.velxoz.finalproject.models.TicketInterface;
 import com.velxoz.finalproject.models.TripInterface;
 import com.velxoz.finalproject.util.Currency;
 import com.velxoz.finalproject.util.session.MainSession;
@@ -32,9 +37,10 @@ public class BookingActivity extends AppCompatActivity {
     Button btnPesan;
     TextView tvAgencyName, tvBusCode, tvSourceStop, tvDestStop, tvTanggal, tvJam, tvSeats, tvHarga;
     TripInterface tripInterface;
+    TicketInterface ticketInterface;
     MainSession mainSession;
     HashMap<String, String> user;
-    String token, id_trip;
+    String token, user_id, id_trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,8 @@ public class BookingActivity extends AppCompatActivity {
                 }
             }
         }.start();
+
+        btnPesan.setOnClickListener(v -> bookTicket());
     }
 
     private void loadComponents(){
@@ -83,15 +91,45 @@ public class BookingActivity extends AppCompatActivity {
 
         mainSession = new MainSession(this);
         user = mainSession.getUserDetails();
+        user_id = user.get("_id");
         token = user.get("token");
-
-        tripInterface = APIClient.getClient(token).create(TripInterface.class);
 
         Bundle bundle = getIntent().getExtras();
         id_trip = bundle.getString("id_trip");
     }
 
+    private void bookTicket(){
+        BookingRequest bookingRequest = new BookingRequest(false, tvTanggal.getText().toString(), user_id, 1, id_trip);
+        ticketInterface = APIClient.getClient(token).create(TicketInterface.class);
+        Call<ObjectResponse<BookingResponse>> bookCall = ticketInterface.bookTicket(bookingRequest);
+
+        bookCall.enqueue(new Callback<ObjectResponse<BookingResponse>>() {
+            @Override
+            public void onResponse(Call<ObjectResponse<BookingResponse>> call, Response<ObjectResponse<BookingResponse>> response) {
+                if (response.body() != null){
+                    ObjectResponse<BookingResponse> bookObject = response.body();
+                    if(bookObject.getSuccess()){
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id_ticket", bookObject.getObject().getId());
+                        Intent i = new Intent(BookingActivity.this, TicketActivity.class);
+                        i.putExtras(bundle);
+                        startActivity(i);
+                        finish();
+                    }
+                } else{
+                    Toast.makeText(BookingActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ObjectResponse<BookingResponse>> call, Throwable t) {
+                Toast.makeText(BookingActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void callApi(){
+        tripInterface = APIClient.getClient(token).create(TripInterface.class);
         Call<ObjectResponse<TripScheduleResponse>> tripCall = tripInterface.getTripDetail(id_trip);
 
         tripCall.enqueue(new Callback<ObjectResponse<TripScheduleResponse>>() {

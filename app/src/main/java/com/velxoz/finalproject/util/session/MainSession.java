@@ -41,6 +41,13 @@ public class MainSession {
         editor.putString(KEY_TOKEN, token);
         editor.commit();
     }
+    
+    public void updateSession(String first_name, String last_name, String mobile_number){
+        editor.putString(KEY_FIRST_NAME, first_name);
+        editor.putString(KEY_LAST_NAME, last_name);
+        editor.putString(KEY_MOBILE_NUMBER, mobile_number);
+        editor.commit();
+    }
 
     public void checkLogin(){
         if(!this.isLoggedIn()){

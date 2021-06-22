@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.velxoz.finalproject.R;
 import com.velxoz.finalproject.util.session.MainSession;
+import com.velxoz.finalproject.views.UbahDataActivity;
+import com.velxoz.finalproject.views.UbahKataSandiActivity;
 import com.velxoz.finalproject.views.UnderConstructionActivity;
 import com.velxoz.finalproject.views.auth.LoginActivity;
 
@@ -73,12 +75,12 @@ public class ProfileFragment extends Fragment {
     private void listener(){
 
         tvUbahDataDiri.setOnClickListener(v -> {
-            i = new Intent(getActivity(), UnderConstructionActivity.class);
+            i = new Intent(getActivity(), UbahDataActivity.class);
             startActivity(i);
         });
 
         tvUbahKataSandi.setOnClickListener(v -> {
-            i = new Intent(getActivity(), UnderConstructionActivity.class);
+            i = new Intent(getActivity(), UbahKataSandiActivity.class);
             startActivity(i);
         });
 

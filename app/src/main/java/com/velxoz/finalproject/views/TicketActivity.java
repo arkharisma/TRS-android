@@ -1,18 +1,14 @@
-package com.velxoz.finalproject.views.fragments;
+package com.velxoz.finalproject.views;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.velxoz.finalproject.R;
@@ -22,7 +18,6 @@ import com.velxoz.finalproject.entity.ticket.Ticket;
 import com.velxoz.finalproject.models.APIClient;
 import com.velxoz.finalproject.models.TicketInterface;
 import com.velxoz.finalproject.util.session.MainSession;
-import com.velxoz.finalproject.views.TicketActivity;
 
 import java.util.HashMap;
 
@@ -30,9 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TicketFragment extends Fragment {
-
-    View view;
+public class TicketActivity extends AppCompatActivity {
 
     RecyclerView rvTicket;
     private RecyclerView.Adapter mTripAdapter;
@@ -42,34 +35,19 @@ public class TicketFragment extends Fragment {
     HashMap<String, String> user;
     String token;
 
-    public TicketFragment() {
-        // Required empty public constructor
-    }
-
-    public static TicketFragment newInstance() {
-        TicketFragment fragment = new TicketFragment();
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_ticket, container, false);
-
-        mainSession = new MainSession(view.getContext());
+        setContentView(R.layout.activity_ticket);
+        mainSession = new MainSession(TicketActivity.this);
         user = mainSession.getUserDetails();
         token = user.get("token");
-        rvTicket = view.findViewById(R.id.rvTicket);
-        mLayoutManagerTrip = new LinearLayoutManager(view.getContext());
+        rvTicket = findViewById(R.id.rvTicket);
+        mLayoutManagerTrip = new LinearLayoutManager(this);
         rvTicket.setLayoutManager(mLayoutManagerTrip);
         ticketInterface = APIClient.getClient(token).create(TicketInterface.class);
 
-        final ProgressDialog progressDialog = new ProgressDialog(view.getContext(), R.style.dialogWaiting);
+        final ProgressDialog progressDialog = new ProgressDialog(TicketActivity.this, R.style.dialogWaiting);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.show();
 
@@ -83,7 +61,7 @@ public class TicketFragment extends Fragment {
                         progressDialog.dismiss();
                     }
                     try{
-                        getActivity().runOnUiThread(() -> {
+                        runOnUiThread(() -> {
                             refresh();
                         });
                     } catch(Exception e) {
@@ -95,8 +73,6 @@ public class TicketFragment extends Fragment {
                 }
             }
         }.start();
-
-        return view;
     }
 
     private void refresh(){
@@ -105,13 +81,13 @@ public class TicketFragment extends Fragment {
             @Override
             public void onResponse(Call<ListResponse<Ticket>> call, Response<ListResponse<Ticket>> response) {
                 ListResponse<Ticket> ticketList = response.body();
-                mTripAdapter = new TicketListAdapter(ticketList, view.getContext());
+                mTripAdapter = new TicketListAdapter(ticketList, TicketActivity.this);
                 rvTicket.setAdapter(mTripAdapter);
             }
 
             @Override
             public void onFailure(Call<ListResponse<Ticket>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Gagal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TicketActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
             }
         });
     }
