@@ -113,6 +113,7 @@ public class BookingActivity extends AppCompatActivity {
                         bundle.putString("id_ticket", bookObject.getObject().getId());
                         Intent i = new Intent(BookingActivity.this, TicketActivity.class);
                         i.putExtras(bundle);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
                     }

@@ -16,6 +16,7 @@ import com.velxoz.finalproject.entity.ListResponse;
 import com.velxoz.finalproject.entity.ticket.Ticket;
 import com.velxoz.finalproject.util.Currency;
 import com.velxoz.finalproject.views.BookingActivity;
+import com.velxoz.finalproject.views.TicketActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,6 +44,14 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.My
         holder.tvDestStop.setText(ticketList.getData().get(position).getTripSchedule().getTripDetail().getDestStop().getName());
         holder.tvTanggal.setText(ticketList.getData().get(position).getJourneyDate());
         holder.tvTime.setText(ticketList.getData().get(position).getTripSchedule().getTripDetail().getJourneyTime());
+
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("id_ticket", ticketList.getData().get(position).getId());
+            Intent i = new Intent(v.getContext(), TicketActivity.class);
+            i.putExtras(bundle);
+            v.getContext().startActivity(i);
+        });
     }
 
     @Override

@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.velxoz.finalproject.R;
@@ -31,6 +33,7 @@ import retrofit2.Response;
 
 public class SearchTripActivity extends AppCompatActivity {
 
+    TextView tvNone;
     RecyclerView rvListTrip;
     TripInterface tripInterface;
     String sourceStop, destStop, tanggal, token;
@@ -48,6 +51,7 @@ public class SearchTripActivity extends AppCompatActivity {
         user = mainSession.getUserDetails();
         token = user.get("token");
         rvListTrip = findViewById(R.id.rvListTrip);
+        tvNone = findViewById(R.id.tvNone);
         mLayoutManagerTrip = new LinearLayoutManager(this);
         rvListTrip.setLayoutManager(mLayoutManagerTrip);
         tripInterface = APIClient.getClient(token).create(TripInterface.class);
@@ -95,14 +99,24 @@ public class SearchTripActivity extends AppCompatActivity {
         tripCall.enqueue(new Callback<ListResponse<TripScheduleResponse>>() {
             @Override
             public void onResponse(Call<ListResponse<TripScheduleResponse>> call, Response<ListResponse<TripScheduleResponse>> response) {
-                ListResponse<TripScheduleResponse> tripList = response.body();
-                mTripAdapter = new TripScheduleListAdapter(tripList, SearchTripActivity.this);
-                rvListTrip.setAdapter(mTripAdapter);
+                if(response.body() != null) {
+                    ListResponse<TripScheduleResponse> tripList = response.body();
+                    if(tripList.getData().size() != 0) {
+                        mTripAdapter = new TripScheduleListAdapter(tripList, SearchTripActivity.this);
+                        rvListTrip.setAdapter(mTripAdapter);
+                    } else{
+                        tvNone.setVisibility(View.VISIBLE);
+                    }
+                } else{
+                    tvNone.setText(response.message());
+                    tvNone.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onFailure(Call<ListResponse<TripScheduleResponse>> call, Throwable t) {
-                Toast.makeText(SearchTripActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                tvNone.setText(t.toString());
+                tvNone.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -28,4 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/tvNone"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:text="Perjalanan yang anda cari belum ada."
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

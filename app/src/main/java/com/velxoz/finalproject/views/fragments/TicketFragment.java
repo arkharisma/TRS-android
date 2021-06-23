@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.velxoz.finalproject.R;
@@ -32,8 +33,8 @@ import retrofit2.Response;
 
 public class TicketFragment extends Fragment {
 
+    TextView tvNone;
     View view;
-
     RecyclerView rvTicket;
     private RecyclerView.Adapter mTripAdapter;
     private RecyclerView.LayoutManager mLayoutManagerTrip;
@@ -43,7 +44,6 @@ public class TicketFragment extends Fragment {
     String token;
 
     public TicketFragment() {
-        // Required empty public constructor
     }
 
     public static TicketFragment newInstance() {
@@ -64,6 +64,7 @@ public class TicketFragment extends Fragment {
         mainSession = new MainSession(view.getContext());
         user = mainSession.getUserDetails();
         token = user.get("token");
+        tvNone = view.findViewById(R.id.tvNone);
         rvTicket = view.findViewById(R.id.rvTicket);
         mLayoutManagerTrip = new LinearLayoutManager(view.getContext());
         rvTicket.setLayoutManager(mLayoutManagerTrip);
@@ -104,14 +105,29 @@ public class TicketFragment extends Fragment {
         ticketCall.enqueue(new Callback<ListResponse<Ticket>>() {
             @Override
             public void onResponse(Call<ListResponse<Ticket>> call, Response<ListResponse<Ticket>> response) {
-                ListResponse<Ticket> ticketList = response.body();
-                mTripAdapter = new TicketListAdapter(ticketList, view.getContext());
-                rvTicket.setAdapter(mTripAdapter);
+                if(response.body() != null) {
+                    ListResponse<Ticket> ticketList = response.body();
+                    if(ticketList.getSuccess()) {
+                        if(ticketList.getData().size() != 0) {
+                            mTripAdapter = new TicketListAdapter(ticketList, view.getContext());
+                            rvTicket.setAdapter(mTripAdapter);
+                        } else{
+                            tvNone.setVisibility(View.VISIBLE);
+                        }
+                    } else{
+                        tvNone.setText(ticketList.getMessage());
+                        tvNone.setVisibility(View.VISIBLE);
+                    }
+                } else{
+                    tvNone.setText(response.message());
+                    tvNone.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onFailure(Call<ListResponse<Ticket>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Gagal", Toast.LENGTH_SHORT).show();
+                tvNone.setText(t.toString());
+                tvNone.setVisibility(View.VISIBLE);
             }
         });
     }
