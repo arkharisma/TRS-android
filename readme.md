@@ -7,6 +7,6 @@
 	- Password	: kharisma
 
 - Release APK
-	- [Aplikasi Tayo](https://github.com/arkharisma/TRS-android/blob/main/app/release/app-release.apk)
+	- [Aplikasi Tayo](https://github.com/arkharisma/TRS-android/blob/main/app/release/app-release.apk?raw=true)
 
 </samp>
